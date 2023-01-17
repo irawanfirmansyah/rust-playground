@@ -22,6 +22,28 @@ fn solution(list: Vec<i32>) -> i32 {
   return result;
 }
 
+fn solution_2(list: Vec<i32>, sum: i32, count_move: i32) -> i32 {
+  println!("list: {:?}, sum: {1}, move: {2}", list, sum, count_move);
+  if list.len() <= 0 {
+    return count_move;
+  }
+
+  let curr = list.first().unwrap();
+
+  let mut new_list = Vec::new();
+
+  if sum + *curr < 0 {
+    new_list.extend_from_slice(&list[1..]);
+    new_list.push(*curr);
+
+    return solution_2(new_list, sum, count_move + 1);
+  }
+
+  new_list.extend_from_slice(&list[1..]);
+
+  return solution_2(new_list, sum + *curr, count_move);
+}
+
 fn read_value(i: &i8) {
   // Use immutable reference 'i':
   println!("x = {}", *i);
@@ -33,8 +55,10 @@ fn change_value(i: &mut i8) {
 }
 
 fn main() {
-  let inp1 = vec![5, 1, 8, 9, 2, 2, 3, 7, 3, 3];
-  println!("{}", solution(inp1));
+  solution(vec![5, 1, 8, 9, 2, 2, 3, 7, 3, 3]);
+  // println!("{}", solution(inp1));
+
+  println!("{}", solution_2(vec![5, 1, -8, 9, 2, -7, 3, 3], 0, 0));
 
   let mut x = 10;
 
@@ -45,5 +69,5 @@ fn main() {
   change_value(ref2);
 
   // Print new value of 'x':
-  println!("New value of x = {}", *ref2);
+  // println!("New value of x = {}", *ref2);
 }
