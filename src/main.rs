@@ -23,7 +23,7 @@ fn solution(list: Vec<i32>) -> i32 {
 }
 
 fn solution_2(list: Vec<i32>, sum: i32, count_move: i32) -> i32 {
-  println!("list: {:?}, sum: {1}, move: {2}", list, sum, count_move);
+  println!("list: {:?}, sum: {}, move: {}", list, sum, count_move);
   if list.len() <= 0 {
     return count_move;
   }
