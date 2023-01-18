@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, vec};
 
 /**
  * Problem:
@@ -73,6 +73,37 @@ fn solution_2(list: Vec<i32>) -> i32 {
   return mov;
 }
 
+/**
+ * Problem: Given graph with key K as node and value V as list of dependencies.
+ *          Return list of root nodes (not having dependencies)
+ * ex:      Graph:
+ *          A --> B --> C
+ *          D --> E
+ *          
+ *          Ans:
+ *          ["C", "E"]
+ * 
+ * 
+ */
+fn solution_3(monorepo_graph: &HashMap<&str, Vec<&str>>) -> Vec<String> {
+  let mut map: HashMap<String, bool> = HashMap::new();
+
+  // println!("{:?}", map);
+  // Assume all nodes are root (no deps)
+  for (package_1, _) in monorepo_graph.iter() {
+    map.insert(package_1.to_string(), true);
+  }
+  println!("{:?}", map);
+
+  for (package, dependencies) in monorepo_graph.iter() {
+    if dependencies.len() > 0 {
+      map.remove(*package);
+    }
+  }
+
+  return map.keys().cloned().collect();
+}
+
 fn read_value(i: &i8) {
   // Use immutable reference 'i':
   println!("num = {}", *i);
@@ -98,6 +129,16 @@ fn main() {
   println!("{}", solution_2(vec![1, -2, 3, -4, 3, 2]));
   println!("{}", solution_2(vec![1, -11, -2, 9, 8]));
   println!("{}", solution_2(vec![1, -11, -2, 9, 8]));
+
+  let graph_1 = HashMap::from([
+    ("A", vec!["B"]),
+    ("B", vec!["C"]),
+    ("C", vec![]),
+    ("D", vec!["E"]),
+    ("E", vec![]),
+  ]);
+
+  println!("{:?}", solution_3(&graph_1));
 
   let mut x = 10;
 
