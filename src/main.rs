@@ -131,11 +131,11 @@ fn main() {
   println!("{}", solution_2(vec![1, -11, -2, 9, 8]));
 
   let graph_1 = HashMap::from([
-    ("A", vec!["B"]),
-    ("B", vec!["C"]),
-    ("C", vec![]),
-    ("D", vec!["E"]),
-    ("E", vec![]),
+    ("A", vec![]),
+    ("B", vec!["A"]),
+    ("C", vec!["B"]),
+    ("D", vec![]),
+    ("E", vec!["D"]),
   ]);
 
   println!("{:?}", solution_3(&graph_1));
