@@ -1,6 +1,8 @@
+use std::collections::HashMap;
 mod fibonacci;
 mod solution_1;
 mod solution_2;
+mod solution_3;
 
 fn read_value(i: &i8) {
   // Use immutable reference 'i':
@@ -30,6 +32,16 @@ fn main() {
   println!("{}", solution_2::solution_2(vec![1, -2, 3, -4, 3, 2]));
   println!("{}", solution_2::solution_2(vec![1, -11, -2, 9, 8]));
   println!("{}", solution_2::solution_2(vec![1, -11, -2, 9, 8]));
+
+  let graph_1 = HashMap::from([
+    ("A", vec![]),
+    ("B", vec!["A"]),
+    ("C", vec!["B"]),
+    ("D", vec![]),
+    ("E", vec!["D"]),
+  ]);
+
+  println!("{:?}", solution_3::solution_3(&graph_1));
 
   let mut x = 10;
 
